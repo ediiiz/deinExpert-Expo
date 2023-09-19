@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "deinExpert-Expo",
-    "slug": "deinExpert-Expo",
+    "name": "deinExpert",
+    "slug": "deinExpert",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
