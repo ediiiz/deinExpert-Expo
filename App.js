@@ -66,21 +66,19 @@ const WebViewComponent = () => {
   };
 
   return (
-  <PanGestureHandler onHandlerStateChange={onSwipeHandlerStateChange}>
-    <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
-      <WebView
-        ref={webViewRef}
-        source={{ uri: 'https://www.expert.de/' }}
-        javaScriptEnabled={true}
-        onNavigationStateChange={onNavigationStateChange}
-        originWhitelist={['*']}
-        pullToRefreshEnabled={true}
-        allowsBackForwardNavigationGestures={true}
-      />
-    </SafeAreaView>
-  </PanGestureHandler>
-);
+      <SafeAreaView style={{ flex: 1 }}>
+        <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
+        <WebView
+          ref={webViewRef}
+          source={{ uri: 'https://www.expert.de/' }}
+          javaScriptEnabled={true}
+          onNavigationStateChange={onNavigationStateChange}
+          originWhitelist={['*']}
+          pullToRefreshEnabled={true}
+          allowsBackForwardNavigationGestures={true}
+        />
+      </SafeAreaView>
+  );
 };
 
 export default WebViewComponent;
