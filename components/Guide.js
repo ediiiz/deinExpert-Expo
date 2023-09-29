@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 
 const Guide = () => (
   <View style={styles.emptyStateContainer}>
-    {['Gib "expert.de" in das Eingabefeld ein.', 'Drücken auf "Los"', 'Auf expert.de wird dann der Agent installiert',
+    {['Gib "expert.de" in das Eingabefeld ein.', 'Drücke auf "Los"', 'Auf expert.de wird dann der Agent installiert',
       'Akzeptiere alle Expert Cookies damit der Agent funktioniert', 'Wähle keinen Markt und schließe das Popup einfach',
       'Der Agent ist jetzt auf den Produktseiten verfügbar und bereit!'].map((text, index) => (
         <View key={index} style={styles.listItem}>

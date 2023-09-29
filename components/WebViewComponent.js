@@ -43,6 +43,7 @@ const WebViewComponent = () => {
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
+          placeholder='Gib hier die Webadresse ein...'
           onChangeText={setUrlInput}
           value={urlInput}
         />
@@ -50,7 +51,7 @@ const WebViewComponent = () => {
           <Text style={styles.buttonText}>Los</Text>
         </TouchableOpacity>
       </View>
-      <ProgressBar progress={progress} color={Colors.grey400} />
+      <ProgressBar progress={progress} color={Colors.grey300} />
       {loadWebView ? (
         <WebView
           ref={webViewRef}
