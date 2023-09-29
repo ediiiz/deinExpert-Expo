@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "deinExpert",
+    "name": "deinExpert Agent",
     "slug": "deinExpert",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -19,16 +19,17 @@
       "bundleIdentifier": "com.deinExpert.Agent"
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
       "package": "com.deinExpert.Agent"
     },
     "extra": {
       "eas": {
         "projectId": "83c2e7a0-2aaf-41c8-af53-220f9d4aa786"
       }
+    }
+  },
+  "extra": {
+    "eas": {
+      "projectId": "83c2e7a0-2aaf-41c8-af53-220f9d4aa786"
     }
   }
 }

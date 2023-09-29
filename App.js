@@ -4,10 +4,9 @@ import { View } from 'react-native';
 import deinExpertAgent64 from './assets/deinExpert';
 import { BackHandler, Platform } from 'react-native';
 import { Buffer } from 'buffer';
-import { PanGestureHandler } from 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
+import { ProgressBar, Colors } from 'react-native-paper';
 
 function base64Decode(input) {
   try {
@@ -19,10 +18,13 @@ function base64Decode(input) {
   }
 }
 
+
 const WebViewComponent = () => {
   const [jsCode, setJsCode] = useState('');
   const [canGoBack, setCanGoBack] = useState(false);
+  const [progress, setProgress] = useState(0);
   const webViewRef = useRef(null);
+  
   const onAndroidBackPress = () => {
     if (webViewRef.current) {
       webViewRef.current.goBack();
@@ -35,14 +37,10 @@ const WebViewComponent = () => {
     const decodedJs = base64Decode(deinExpertAgent64);
     setJsCode(`window.addEventListener("load", function () {${decodedJs}})`);
 
-    // Adding an event listener for the hardware back button
     if (Platform.OS === 'android') {
       BackHandler.addEventListener('hardwareBackPress', onAndroidBackPress);
       return () => {
-        BackHandler.removeEventListener(
-          'hardwareBackPress',
-          onAndroidBackPress
-        );
+        BackHandler.removeEventListener('hardwareBackPress', onAndroidBackPress);
       };
     }
   }, []);
@@ -54,31 +52,23 @@ const WebViewComponent = () => {
     }
   };
 
-  const onSwipeHandlerStateChange = (event) => {
-    if (
-      canGoBack &&
-      event.nativeEvent.oldState === 4 &&
-      event.nativeEvent.translationX > 50
-    ) {
-      // Detect a swipe from the left to the right
-      webViewRef.current.goBack();
-    }
-  };
-
   return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
-        <WebView
-          ref={webViewRef}
-          source={{ uri: 'https://www.expert.de/' }}
-          javaScriptEnabled={true}
-          onNavigationStateChange={onNavigationStateChange}
-          originWhitelist={['*']}
-          pullToRefreshEnabled={true}
-          allowsBackForwardNavigationGestures={true}
-        />
-      </SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
+      <StatusBar style="auto" />
+      <ProgressBar progress={progress} color={Colors.orange100} />
+      <WebView
+        ref={webViewRef}
+        source={{ uri: 'https://www.expert.de/' }}
+        javaScriptEnabled={true}
+        onNavigationStateChange={onNavigationStateChange}
+        originWhitelist={['*']}
+        pullToRefreshEnabled={true}
+        allowsBackForwardNavigationGestures={true}
+        onLoadProgress={({ nativeEvent }) => setProgress(nativeEvent.progress)}
+      />
+    </SafeAreaView>
   );
 };
 
 export default WebViewComponent;
+
