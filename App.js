@@ -1,11 +1,13 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
 import WebViewComponent from './components/WebViewComponent';
 
 const App = () => {
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar style="light"/>
       <WebViewComponent />
     </SafeAreaView>
   );
@@ -14,7 +16,7 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F9F9F9',
+    backgroundColor: '#222222',
   },
 });
 

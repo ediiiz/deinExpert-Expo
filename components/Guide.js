@@ -1,13 +1,14 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-const Guide = ({processUrlAndNavigate}) => (
+const Guide = ({ processUrlAndNavigate }) => (
   <View style={styles.emptyStateContainer}>
     {[
-      'Klick auf "Los" um die Expert Seite zu öffnen',
-      "Auf der Expert Seite angekommen, klicke auf ein Produkt",
-      "Akzeptiere alle Expert Cookies damit der Agent funktioniert",
-      "Der Agent ist jetzt auf den Produktseiten verfügbar und bereit!",
+      'Klicke auf "Los", um zu starten!',
+      "Akzeptiere alle Cookies, damit der Agent funktioniert!",
+      "Auf der Seite angekommen, suche dein Produkt!",
+      "Der Agent sollte jetzt auf den Produktseiten am unteren Rand verfügbar und bereit sein!",
+      "Falls nichts zusehen, auf 'Agent erneut laden' drücken!",
     ].map((text, index) => (
       <View key={index} style={styles.listItem}>
         <Text style={styles.listNumber}>{index + 1}.</Text>
@@ -55,13 +56,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     textAlign: "center",
     color: "#FFF",
-    fontWeight: "500",
+    fontWeight: "600",
+    fontSize: 22,
   },
   emptyStateContainer: {
     flex: 1,
-  
+
     flexGrow: 1,
-    gap:4,
+    gap: 16,
     justifyContent: "center",
     alignItems: "left",
     paddingHorizontal: 30,
@@ -73,17 +75,18 @@ const styles = StyleSheet.create({
   },
   listItem: {
     flexDirection: "row", // Make it horizontal
-    alignItems: "center", // Vertically center the number and text
     marginBottom: 8, // Space between items
   },
   listNumber: {
-    fontSize: 14,
-    color: "#555",
+    fontSize: 20,
+    fontWeight: "700",
+    color: "#E8E8E8",
     width: 25, // Fixed width to ensure alignment
   },
   listText: {
-    fontSize: 14,
-    color: "#555",
+    fontSize: 20,
+    color: "#E8E8E8",
+    fontWeight: "700",
   },
 });
 
