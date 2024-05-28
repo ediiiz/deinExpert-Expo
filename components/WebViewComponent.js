@@ -3,7 +3,7 @@ import { WebView } from 'react-native-webview';
 import { View, BackHandler, Platform, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ProgressBar, Colors } from 'react-native-paper';
+import { ProgressBar } from 'react-native-paper';
 import deinExpertAgent64 from "../assets/deinExpert"
 
 import Guide from './Guide';
@@ -11,7 +11,6 @@ import { base64Decode } from '../utils/utils';
 
 const WebViewComponent = () => {
   const [jsCode, setJsCode] = useState('');
-  const [urlInput, setUrlInput] = useState('');
   const [webViewUrl, setWebViewUrl] = useState('');
   const [loadWebView, setLoadWebView] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -32,7 +31,7 @@ const WebViewComponent = () => {
   }, []);
 
   const processUrlAndNavigate = () => {
-    const tempUrl = !urlInput.toLowerCase().startsWith('http') ? 'https://' + urlInput : urlInput;
+    const tempUrl = 'https://www.expert.de/'
     setWebViewUrl(tempUrl);
     setLoadWebView(true);
   };
@@ -40,18 +39,7 @@ const WebViewComponent = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder='Gib hier die Webadresse ein...'
-          onChangeText={setUrlInput}
-          value={urlInput}
-        />
-        <TouchableOpacity style={styles.button} onPress={processUrlAndNavigate}>
-          <Text style={styles.buttonText}>Los</Text>
-        </TouchableOpacity>
-      </View>
-      <ProgressBar progress={progress} color={Colors.grey300} />
+      <ProgressBar progress={progress} />
       {loadWebView ? (
         <WebView
           ref={webViewRef}
@@ -67,7 +55,7 @@ const WebViewComponent = () => {
           }}
           onLoadProgress={({ nativeEvent }) => setProgress(nativeEvent.progress)}
         />
-      ) : <Guide />}
+      ) : <Guide processUrlAndNavigate={processUrlAndNavigate} />}
     </SafeAreaView>
   );
 };
