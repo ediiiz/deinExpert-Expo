@@ -12,6 +12,7 @@ import { base64Decode } from '../utils/utils';
 const WebViewComponent = () => {
   const [jsCode, setJsCode] = useState('');
   const [webViewUrl, setWebViewUrl] = useState('');
+  const [stateUrl, setStateUrl] = useState('');
   const [loadWebView, setLoadWebView] = useState(false);
   const [progress, setProgress] = useState(0);
   const [hasReloaded, setHasReloaded] = useState(false);
@@ -20,8 +21,12 @@ const WebViewComponent = () => {
   useEffect(() => {
     const decodedJs = base64Decode(deinExpertAgent64);
     console.log("Loaded Javascript");  // Debug log
+    console.log('WINDOW_LOCATION_VALUE:', decodedJs.includes('WINDOW_LOCATION_VALUE'));  // Debug log
+
     //setJsCode(`window.addEventListener("DOMContentLoaded", function () {${decodedJs}})`);
     setJsCode(decodedJs);
+
+    console.log(stateUrl);  // Debug log
 
 
     if (Platform.OS === 'android') {
@@ -47,25 +52,37 @@ const WebViewComponent = () => {
 
   const toUrl = (url) => {
     const urlObj = new URL(url);
-    return urlObj
+    return urlObj;
+  };
+
+  const handleNavigationStateChange = (navState) => {
+    // Check if the URL has actually changed before logging
+    if (navState.url !== stateUrl) {
+      console.log(toUrl(navState.url).pathname);  // Log the navigation state
+      setStateUrl(navState.url);
+      //webViewRef.current.injectJavaScript(jsCode.replace('WINDOW_LOCATION_VALUE', toUrl(stateUrl).pathname));
+      console.log('Reloading');
+      webViewRef.current.reload();
+    }
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <ProgressBar progress={progress} style={styles.progressBar} />
       {loadWebView ? (
-        <><TouchableOpacity style={styles.button} onPress={reload}>
-          <Text style={styles.buttonText}>Agent erneut laden!</Text>
-        </TouchableOpacity><WebView
-            ref={webViewRef}
-            source={{ uri: webViewUrl }}
-            javaScriptEnabled
-            originWhitelist={['*']}
-            pullToRefreshEnabled
-            allowsBackForwardNavigationGestures
-            onLoadEnd={() => {
-              webViewRef.current.injectJavaScript(jsCode);
-            }} /></>
+        <WebView
+          ref={webViewRef}
+          source={{ uri: webViewUrl }}
+          javaScriptEnabled
+          originWhitelist={['*']}
+          pullToRefreshEnabled
+          allowsBackForwardNavigationGestures
+          onLoadEnd={() => {
+            webViewRef.current.injectJavaScript(jsCode.replace('WINDOW_LOCATION_VALUE', toUrl(stateUrl).pathname));
+          }}
+          onLoadProgress={({ nativeEvent }) => setProgress(nativeEvent.progress)}
+          onNavigationStateChange={handleNavigationStateChange}
+        />
       ) : <Guide processUrlAndNavigate={processUrlAndNavigate} />}
     </SafeAreaView>
   );
