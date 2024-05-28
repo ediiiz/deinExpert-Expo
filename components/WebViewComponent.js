@@ -78,10 +78,10 @@ const WebViewComponent = () => {
           pullToRefreshEnabled
           allowsBackForwardNavigationGestures
           onLoadEnd={() => {
-            webViewRef.current.injectJavaScript(jsCode.replace('WINDOW_LOCATION_VALUE', toUrl(stateUrl).pathname));
+            webViewRef.current.injectJavaScript(jsCode);
           }}
           onLoadProgress={({ nativeEvent }) => setProgress(nativeEvent.progress)}
-          onNavigationStateChange={handleNavigationStateChange}
+        //onNavigationStateChange={handleNavigationStateChange}
         />
       ) : <Guide processUrlAndNavigate={processUrlAndNavigate} />}
     </SafeAreaView>
