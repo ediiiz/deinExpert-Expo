@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 const Guide = ({ processUrlAndNavigate }) => (
   <View style={styles.emptyStateContainer}>
     {[
-      'Klicke auf "Los", um zu starten!',
+      'Klicke auf "Verstanden", um zu starten!',
       "Akzeptiere alle Cookies, damit der Agent funktioniert!",
       "Auf der Seite angekommen, suche dein Produkt!",
       "Der Agent sollte jetzt auf den Produktseiten am unteren Rand verfügbar und bereit sein!",
