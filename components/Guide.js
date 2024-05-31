@@ -4,11 +4,11 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 const Guide = ({ processUrlAndNavigate }) => (
   <View style={styles.emptyStateContainer}>
     {[
-      'Klicke auf "Verstanden", um zu starten!',
       "Akzeptiere alle Cookies, damit der Agent funktioniert!",
       "Auf der Seite angekommen, suche dein Produkt!",
+      "Klicke auf 'deinExpert starten'.",
       "Der Agent sollte jetzt auf den Produktseiten am unteren Rand verfügbar und bereit sein!",
-      "Falls nichts zusehen, auf 'Agent erneut laden' drücken!",
+      'Klicke auf "Verstanden", um zu starten!',
     ].map((text, index) => (
       <View key={index} style={styles.listItem}>
         <Text style={styles.listNumber}>{index + 1}.</Text>
@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
   },
   emptyStateContainer: {
     flex: 1,
-
+    textAlign: "center",
+    textWrap: "wrap",
     flexGrow: 1,
     gap: 16,
     justifyContent: "center",
