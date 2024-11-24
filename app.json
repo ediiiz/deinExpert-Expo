@@ -6,14 +6,13 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.deinExpert.Agent"
@@ -25,11 +24,6 @@
       "eas": {
         "projectId": "83c2e7a0-2aaf-41c8-af53-220f9d4aa786"
       }
-    }
-  },
-  "extra": {
-    "eas": {
-      "projectId": "83c2e7a0-2aaf-41c8-af53-220f9d4aa786"
     }
   }
 }
